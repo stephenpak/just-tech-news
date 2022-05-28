@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Vote } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
@@ -20,7 +20,6 @@ router.get('/', (req, res) => {
     });
 });
 
-//get one
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -47,7 +46,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//write post
 router.post('/', (req, res) => {
   // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
   Post.create({
@@ -62,7 +60,9 @@ router.post('/', (req, res) => {
     });
 });
 
-//update post
+// PUT /api/posts/upvote
+router.put('/upvote', (req, res) => {});
+
 router.put('/:id', (req, res) => {
   Post.update(
     {
@@ -87,7 +87,6 @@ router.put('/:id', (req, res) => {
     });
 });
 
-//delete post
 router.delete('/:id', (req, res) => {
   Post.destroy({
     where: {
